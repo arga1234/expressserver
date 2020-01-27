@@ -4,7 +4,8 @@ const path = require('path')
 
 const app = express()
 
-const staticFile = path.join(__dirname, '/src/public')
+const staticFile = path.join(__dirname, '/public')
+app.set('view engine', 'hbs')
 app.use(express.static(staticFile))
 
 // Parse request of content type - application/x-www-form-urlencoded
@@ -14,7 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.get('', (req, res)=>{
-    res.json({"message" : "Hello there"})
+    res.render('index', {
+        title : 'Weather App', 
+        name : 'Arga Wirawan'
+    })
 })
 
 app.get('/about', (req, res)=>{
@@ -27,14 +31,6 @@ app.get('/help', (req, res)=>{
 
 app.get('/weather', (req, res)=>{
     res.send('<h1>Hello Express, This is weather page<h1>')
-})
-
-app.get('/index', (req, res)=>{
-    res.send('')
-})
-
-app.get('/', (req, res)=>{
-    res.json({"message" : "Hello there"})
 })
 
 app.listen(3000, ()=>{
