@@ -22,16 +22,18 @@ app.get('', (req, res)=>{
 })
 
 app.get('/about', (req, res)=>{
-    res.send('<h1>Hello Express, This is about page</h1>')
+    res.render('about', {
+        title : 'About', 
+    })
 })
 
 app.get('/help', (req, res)=>{
-    res.send('<h1>Hello Express, This is help page</h1>')
+    res.render('help', {
+        title : 'Weather App', 
+        name : 'Arga Wirawan'
+    })
 })
 
-app.get('/weather', (req, res)=>{
-    res.send('<h1>Hello Express, This is weather page<h1>')
-})
 
 app.listen(3000, ()=>{
     console.log("app listening on port 3000")
