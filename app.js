@@ -1,11 +1,20 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const path = require('path')
+const hbs = require('hbs')
 
 const app = express()
-
+// Defines paths for Express Config
 const staticFile = path.join(__dirname, '/public')
+const viewPath = path.join(__dirname, '/templates/views')
+const partialsPath = path.join(__dirname, '/templates/partials')
+
+// Setup Handlebars
 app.set('view engine', 'hbs')
+app.set('views', viewPath)
+hbs.registerPartials(partialsPath)
+
+// Setup static directory to serve 
 app.use(express.static(staticFile))
 
 // Parse request of content type - application/x-www-form-urlencoded
@@ -23,14 +32,16 @@ app.get('', (req, res)=>{
 
 app.get('/about', (req, res)=>{
     res.render('about', {
-        title : 'About', 
+        title : 'About Page', 
+        name : 'Arga Wirawan'
     })
 })
 
 app.get('/help', (req, res)=>{
     res.render('help', {
-        title : 'Weather App', 
-        name : 'Arga Wirawan'
+        title : 'Help Page', 
+        name : 'Arga Wirawan', 
+        text : 'This is the help text'
     })
 })
 
